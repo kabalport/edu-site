@@ -17,7 +17,7 @@ interface Props {
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#93a26c',
+            main: '#F5F5F5',
         },
         secondary: {
             main: '#dc004e',
@@ -44,6 +44,9 @@ const theme = createTheme({
                     padding: 0,
                     margin: 0,
                     minHeight: 'inherit', // 최소 높이 설정을 상위 요소와 동일하게 설정
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 },
             },
         },
@@ -52,13 +55,13 @@ const theme = createTheme({
         MuiTab: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#912b2b', // 배경색: 연한 회색
-                    color: 'black', // 글씨색: 검은색
+                    backgroundColor: '#F5F5F5', // 배경색: 연한 회색
+                    color: 'gray', // 선택된 탭 글씨색: 빨간색
                     fontSize: '0.8rem', // 폰트 크기 조정
                     minHeight: 40, // 최소 높이 조정
                     '&.Mui-selected': {
-                        backgroundColor: '#4a4a4a', // 선택된 탭 배경색: 진한 회색
-                        color: 'red', // 선택된 탭 글씨색: 빨간색
+                        backgroundColor: '#FFFFFF', // 선택된 탭 배경색: 진한 회색
+                        color: 'black', // 선택된 탭 글씨색: 빨간색
                         minHeight: 40, // 최소 높이 조정
                     },
                     margin: 0,
@@ -72,14 +75,16 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     fontSize: '0.8rem', // 폰트 크기 조정
-                    minHeight: 40, // 최소 높이 조정
+                    minHeight: 'inherit', // 최소 높이 조정
+                    height: '100%', // 높이 설정
                     padding: 0,
                     margin: 0,
+                    display: 'flex', // 추가
+                    alignItems: 'center', // 추가
+                    justifyContent: 'center', // 추가
                 },
             },
         },
-
-
 
 
     },
@@ -88,7 +93,7 @@ const theme = createTheme({
 
 
 function MainHeader({ myInfo, isAuthorized, onLogout }: Props) {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(4);
 
     const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
         setValue(newValue);
@@ -97,14 +102,15 @@ function MainHeader({ myInfo, isAuthorized, onLogout }: Props) {
         <ThemeProvider theme={theme}>
             <AppBar position="static">
                 <Toolbar sx={{ padding: 0, width: '100%'}}>
-                    <Tabs value={value} onChange={handleChange} centered>
-                        <Tab label="사용자지원포털" component={Link} to="/" />
-                        <Tab label="실증지원포털" component={Link} to="/" />
-                        <Tab label="데이터유통포털" component={Link} to="/" />
-                        <Tab label="안심구역포털" component={Link} to="/" />
-                        <Tab label="AI 융합 아카데미" component={Link} to="/" />
-                        <Tab label="사업단 홈페이지" component={Link} to="/" />
+                    <Tabs value={value} onChange={handleChange} centered sx={{ '& .MuiTabs-indicator': { display: 'none' } }}>
+                        <Tab label="포털1" component={Link} to="/" />
+                        <Tab label="포털2" component={Link} to="/" />
+                        <Tab label="포털3" component={Link} to="/" />
+                        <Tab label="포털4" component={Link} to="/" />
+                        <Tab label="교육 사이트" component={Link} to="/" />
+                        <Tab label="포털6" component={Link} to="/" />
                     </Tabs>
+
 
                     {isAuthorized && myInfo && (
                            <Box marginLeft="auto">
@@ -118,7 +124,7 @@ function MainHeader({ myInfo, isAuthorized, onLogout }: Props) {
                            <Button color="inherit" component={Link} to="/signin" sx={{ marginLeft: 'auto' }}>
                            로그인
                            </Button>
-                           <Button color="inherit" component={Link} to="/signup"  sx={{ marginLeft: '1' }}>
+                           <Button color="inherit" component={Link} to="/signup"  sx={{ marginRight: 1}}>
                            회원가입
                            </Button>
                            </>
